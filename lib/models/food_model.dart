@@ -1,9 +1,9 @@
 class Food {
   Food({
     required this.name,
-    required int IG,
-    required double fiber,
-    required double carbohydrates,
+    required this.IG,
+    required this.fiber,
+    required this.carbohydrates,
   });
 
   Food.fromJson(Map<String, Object?> json)
