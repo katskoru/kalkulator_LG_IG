@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "340472254471",
+    "project_id": "kalkulator-lgiig",
+    "storage_bucket": "kalkulator-lgiig.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:340472254471:android:a260c66672e367db825aa2",
+        "android_client_info": {
+          "package_name": "com.katskoru.kalkulator_lg_ig"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "340472254471-vsdarug7s9jj1u5lbiv11rub4a6hc14j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBspGgL_WAoh3kjxcko_YQbu5S2yN24oJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "340472254471-vsdarug7s9jj1u5lbiv11rub4a6hc14j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
