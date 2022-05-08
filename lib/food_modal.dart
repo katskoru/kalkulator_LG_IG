@@ -37,115 +37,120 @@ class _FoodModalState extends State<FoodModal> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: TextFormField(
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(labelText: "Name"),
-              onChanged: (value) {
-                setState(() {
-                  _food!.name = value;
-                });
-              },
-              controller: _nameController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Please enter the name";
-                }
-                return null;
-              },
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(labelText: "Name"),
+                onChanged: (value) {
+                  setState(() {
+                    _food!.name = value;
+                  });
+                },
+                controller: _nameController,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter the name";
+                  }
+                  return null;
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: TextFormField(
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(labelText: "IG"),
-              onChanged: (value) {
-                setState(() {
-                  _food!.IG = int.parse(value);
-                });
-              },
-              controller: _IGController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Please enter IG";
-                }
-                return null;
-              },
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(labelText: "IG"),
+                onChanged: (value) {
+                  setState(() {
+                    _food!.IG = int.parse(value);
+                  });
+                },
+                controller: _IGController,
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter IG";
+                  }
+                  return null;
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: TextFormField(
-              textInputAction: TextInputAction.next,
-              decoration: InputDecoration(labelText: "Carbs"),
-              onChanged: (value) {
-                setState(() {
-                  _food!.carbohydrates = double.parse(value);
-                });
-              },
-              controller: _carbohydratesController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Please enter the carbs";
-                }
-                return null;
-              },
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(labelText: "Carbs"),
+                onChanged: (value) {
+                  setState(() {
+                    _food!.carbohydrates = double.parse(value);
+                  });
+                },
+                controller: _carbohydratesController,
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter the carbs";
+                  }
+                  return null;
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: TextFormField(
-              decoration: InputDecoration(labelText: "Fiber"),
-              onChanged: (value) {
-                setState(() {
-                  _food!.fiber = double.parse(value);
-                });
-              },
-              controller: _fiberController,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return "Please enter the name";
-                }
-                return null;
-              },
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: "Fiber"),
+                onChanged: (value) {
+                  setState(() {
+                    _food!.fiber = double.parse(value);
+                  });
+                },
+                controller: _fiberController,
+                keyboardType: TextInputType.number,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter the name";
+                  }
+                  return null;
+                },
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TextButton(onPressed: () {}, child: const Text("Cancel")),
-              TextButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      if (widget.docID == "") {
-                        FirebaseFirestore.instance
-                            .collection("food")
-                            .add(_food!.toJson());
-                        _nameController!.clear();
-                        _IGController!.clear();
-                        _carbohydratesController!.clear();
-                        _fiberController!.clear();
-                      } else {
-                        FirebaseFirestore.instance
-                            .collection("food")
-                            .doc(widget.docID)
-                            .update(_food!.toJson());
-                        _nameController!.clear();
-                        _IGController!.clear();
-                        _carbohydratesController!.clear();
-                        _fiberController!.clear();
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(fixedSize: Size(190, 40)),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (widget.docID == "") {
+                          FirebaseFirestore.instance
+                              .collection("food")
+                              .add(_food!.toJson());
+                          _nameController!.clear();
+                          _IGController!.clear();
+                          _carbohydratesController!.clear();
+                          _fiberController!.clear();
+                        } else {
+                          FirebaseFirestore.instance
+                              .collection("food")
+                              .doc(widget.docID)
+                              .update(_food!.toJson());
+                          _nameController!.clear();
+                          _IGController!.clear();
+                          _carbohydratesController!.clear();
+                          _fiberController!.clear();
+                        }
                       }
-                    }
-                  },
-                  child: const Text("Save"))
-            ],
-          ),
-        ],
+                    },
+                    child: const Text("Save"))
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
