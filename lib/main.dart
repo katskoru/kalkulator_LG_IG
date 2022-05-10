@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:kalkulator_lg_ig/food_modal.dart';
 import 'package:kalkulator_lg_ig/home.dart';
+import 'package:kalkulator_lg_ig/models/themes/themes_data.dart';
+import 'package:kalkulator_lg_ig/screens/calculator_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,11 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Home(),
+      theme: appThemeData[AppTheme.lightAppTheme],
+      home: const CalculatorScreen(),
     );
   }
 }

@@ -21,16 +21,16 @@ class _FoodModalState extends State<FoodModal> {
   TextEditingController? _IGController;
   TextEditingController? _carbohydratesController;
   TextEditingController? _fiberController;
-  Food? _food;
+  var _newFood = Food(name: "", IG: 0, fiber: 0, carbohydrates: 0);
+
   @override
-  void initState() {
-    _food = widget.food!;
-    _nameController = TextEditingController(text: _food!.name!);
-    _IGController = TextEditingController(text: _food!.IG!.toString());
-    _carbohydratesController =
-        TextEditingController(text: _food!.carbohydrates!.toString());
-    _fiberController = TextEditingController(text: _food!.fiber!.toString());
-    super.initState();
+  dispose() {
+    _nameController!.dispose();
+    _IGController!.dispose();
+    _carbohydratesController!.dispose();
+    _fiberController!.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -48,7 +48,7 @@ class _FoodModalState extends State<FoodModal> {
                 decoration: InputDecoration(labelText: "Name"),
                 onChanged: (value) {
                   setState(() {
-                    _food!.name = value;
+                    _newFood.name = value;
                   });
                 },
                 controller: _nameController,
@@ -67,7 +67,7 @@ class _FoodModalState extends State<FoodModal> {
                 decoration: InputDecoration(labelText: "IG"),
                 onChanged: (value) {
                   setState(() {
-                    _food!.IG = int.parse(value);
+                    _newFood.IG = int.parse(value);
                   });
                 },
                 controller: _IGController,
@@ -87,7 +87,7 @@ class _FoodModalState extends State<FoodModal> {
                 decoration: InputDecoration(labelText: "Carbs"),
                 onChanged: (value) {
                   setState(() {
-                    _food!.carbohydrates = double.parse(value);
+                    _newFood.carbohydrates = double.parse(value);
                   });
                 },
                 controller: _carbohydratesController,
@@ -106,7 +106,7 @@ class _FoodModalState extends State<FoodModal> {
                 decoration: InputDecoration(labelText: "Fiber"),
                 onChanged: (value) {
                   setState(() {
-                    _food!.fiber = double.parse(value);
+                    _newFood.fiber = double.parse(value);
                   });
                 },
                 controller: _fiberController,
@@ -129,20 +129,14 @@ class _FoodModalState extends State<FoodModal> {
                         if (widget.docID == "") {
                           FirebaseFirestore.instance
                               .collection("food")
-                              .add(_food!.toJson());
-                          _nameController!.clear();
-                          _IGController!.clear();
-                          _carbohydratesController!.clear();
-                          _fiberController!.clear();
+                              .add(_newFood.toJson());
+                          initState();
                         } else {
                           FirebaseFirestore.instance
                               .collection("food")
                               .doc(widget.docID)
-                              .update(_food!.toJson());
-                          _nameController!.clear();
-                          _IGController!.clear();
-                          _carbohydratesController!.clear();
-                          _fiberController!.clear();
+                              .update(_newFood.toJson());
+                          initState();
                         }
                       }
                     },
