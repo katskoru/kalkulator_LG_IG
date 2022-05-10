@@ -15,10 +15,14 @@ class CalculatorScreen extends StatelessWidget {
       ]),
       body:
           Column(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        CircleAvatar(
-          radius: 40,
-          child: Text("50"),
-          backgroundColor: Colors.white,
+        Stack(
+          children: [
+            CircleAvatar(
+              radius: 50,
+              child: Text("50"),
+              backgroundColor: Colors.white,
+            ),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
