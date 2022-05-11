@@ -16,7 +16,7 @@ final appThemeData = {
     textTheme: const TextTheme(
       bodyText1: TextStyle(),
       bodyText2: TextStyle(),
-    ).apply(),
+    ).apply(bodyColor: Colors.white),
   ),
   AppTheme.lightAppTheme: ThemeData(
     appBarTheme: AppBarTheme(
