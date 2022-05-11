@@ -46,18 +46,20 @@ class CalculatorScreen extends StatelessWidget {
               ),
               Container(
                 height: 40,
-                color: Colors.red,
+                color: Colors.grey,
               ),
               Bubbles(),
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 15),
-                height: 100,
+                height: 160,
+                margin: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                     color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(15),
                         topRight: Radius.circular(15))),
-                child: ListView(children: [OneIngredient()]),
+                child: ListView(
+                  children: [OneIngredient()],
+                ),
               ),
             ],
           ),

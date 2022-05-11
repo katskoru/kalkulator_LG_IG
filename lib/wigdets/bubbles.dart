@@ -13,10 +13,10 @@ class Bubbles extends StatelessWidget {
       constraints: BoxConstraints(maxHeight: 370),
       child: Stack(
         alignment: Alignment.center,
-        children: [
+        children: const [
           Positioned(
             child: Text("SUMA", style: TextStyle(fontSize: 40)),
-            top: 10,
+            top: 0,
           ),
           Positioned(
             bottom: 0,
