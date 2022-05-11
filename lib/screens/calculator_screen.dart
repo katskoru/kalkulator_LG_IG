@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kalkulator_lg_ig/wigdets/one_ingredient.dart';
 
+import '../wigdets/bubbles.dart';
+
 class CalculatorScreen extends StatelessWidget {
   const CalculatorScreen({Key? key}) : super(key: key);
 
@@ -33,30 +35,22 @@ class CalculatorScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: Stack(
+        child: Column(
           children: [
-            Align(
-              alignment: FractionalOffset.center,
-              child: CircleAvatar(
-                radius: 50,
-                child: Text("50"),
-                backgroundColor: Colors.white,
-              ),
+            Container(
+              height: 100,
+              color: Colors.white,
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(15),
-                          topRight: Radius.circular(15))),
-                  child: ListView(children: [OneIngredient()]),
-                ),
-              ),
+            Bubbles(),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              height: 100,
+              decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15))),
+              child: ListView(children: [OneIngredient()]),
             ),
           ],
         ),
