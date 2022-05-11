@@ -17,7 +17,7 @@ final appThemeData = {
   ),
   AppTheme.lightAppTheme: ThemeData(
     appBarTheme: AppBarTheme(
-      backgroundColor: Color.fromARGB(255, 227, 180, 196),
+      backgroundColor: Color.fromARGB(255, 170, 102, 125),
     ),
     scaffoldBackgroundColor: Color.fromARGB(255, 227, 180, 196),
     textTheme: const TextTheme(
