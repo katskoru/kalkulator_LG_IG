@@ -27,7 +27,7 @@ final appThemeData = {
     ),
     primaryColor: Color.fromARGB(255, 231, 207, 202),
     secondaryHeaderColor: Colors.white,
-    shadowColor: Color.fromARGB(255, 171, 128, 126),
+    shadowColor: Color.fromARGB(255, 138, 100, 98),
     textTheme: const TextTheme(
       bodyText1: TextStyle(
         color: Colors.black,

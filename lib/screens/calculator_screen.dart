@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kalkulator_lg_ig/food_modal.dart';
 import 'package:kalkulator_lg_ig/models/themes/theme_cubit.dart';
+import 'package:kalkulator_lg_ig/wigdets/floating_button.dart';
+import 'package:kalkulator_lg_ig/wigdets/list_of_ingredients.dart';
 import 'package:kalkulator_lg_ig/wigdets/my_text.dart';
 import 'package:kalkulator_lg_ig/wigdets/one_ingredient.dart';
 
@@ -41,8 +44,8 @@ class CalculatorScreen extends StatelessWidget {
           ],
         ),
         body: Container(
-          width: double.infinity * 100,
-          height: double.infinity * 100,
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -60,23 +63,9 @@ class CalculatorScreen extends StatelessWidget {
               Container(
                 height: appBarHeight,
               ),
-              Container(
-                height: 40,
-                color: Theme.of(context).secondaryHeaderColor,
-              ),
+              FloatingButton(),
               Bubbles(),
-              Container(
-                height: 160,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15))),
-                child: ListView(
-                  children: [OneIngredient()],
-                ),
-              ),
+              ListOfIngredients(),
             ],
           ),
         ),

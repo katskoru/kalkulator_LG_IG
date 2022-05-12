@@ -30,7 +30,11 @@ class OneIngredient extends StatelessWidget {
             ],
           ),
         ),
-        Divider(color: Colors.white),
+        Divider(
+          color: Colors.white,
+          indent: 15,
+          endIndent: 15,
+        ),
         ListTile(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
