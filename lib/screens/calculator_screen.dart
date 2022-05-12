@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kalkulator_lg_ig/food_modal.dart';
+import 'package:kalkulator_lg_ig/models/themes/theme_cubit.dart';
+import 'package:kalkulator_lg_ig/wigdets/floating_button.dart';
+import 'package:kalkulator_lg_ig/wigdets/list_of_ingredients.dart';
+import 'package:kalkulator_lg_ig/wigdets/my_text.dart';
 import 'package:kalkulator_lg_ig/wigdets/one_ingredient.dart';
 
 import '../wigdets/bubbles.dart';
@@ -14,27 +20,40 @@ class CalculatorScreen extends StatelessWidget {
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text("Kalkulator ŁG"),
+          title: MyText(
+            text: "Kalkulator ŁG",
+            size: 30,
+            color: Theme.of(context).shadowColor,
+          ),
           centerTitle: true,
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.light_mode),
-            )
+            BlocBuilder<ThemeCubit, ThemeState>(
+              builder: (context, state) {
+                return Switch(
+                    focusColor: Colors.white,
+                    activeTrackColor: Theme.of(context).secondaryHeaderColor,
+                    inactiveThumbColor: Theme.of(context).secondaryHeaderColor,
+                    inactiveTrackColor: Colors.white,
+                    activeColor: Colors.white,
+                    value: state.isDarkThemeOn,
+                    onChanged: (newValue) {
+                      context.read<ThemeCubit>().toggleSwitch(newValue);
+                    });
+              },
+            ),
           ],
         ),
         body: Container(
-          width: double.infinity * 100,
-          height: double.infinity * 100,
+          width: double.infinity,
+          height: double.infinity,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
+                Theme.of(context).primaryColor.withOpacity(0.9),
                 Theme.of(context).primaryColor,
-                Theme.of(context).secondaryHeaderColor.withOpacity(0.9),
-                Theme.of(context).primaryColor.withOpacity(0.95),
-                Theme.of(context).secondaryHeaderColor,
+                Theme.of(context).primaryColor.withOpacity(0.9),
               ],
             ),
           ),
@@ -44,23 +63,9 @@ class CalculatorScreen extends StatelessWidget {
               Container(
                 height: appBarHeight,
               ),
-              Container(
-                height: 40,
-                color: Colors.grey,
-              ),
+              FloatingButton(),
               Bubbles(),
-              Container(
-                height: 160,
-                margin: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15))),
-                child: ListView(
-                  children: [OneIngredient()],
-                ),
-              ),
+              ListOfIngredients(),
             ],
           ),
         ),
