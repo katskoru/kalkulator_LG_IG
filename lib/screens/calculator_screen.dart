@@ -12,11 +12,14 @@ import '../wigdets/bubbles.dart';
 class CalculatorScreen extends StatelessWidget {
   CalculatorScreen({Key? key}) : super(key: key);
 
+  List<Map> myProducts = [];
+
   double appBarHeight = AppBar().preferredSize.height;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -43,30 +46,33 @@ class CalculatorScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [
-                Theme.of(context).primaryColor.withOpacity(0.9),
-                Theme.of(context).primaryColor,
-                Theme.of(context).primaryColor.withOpacity(0.9),
+        body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          child: Container(
+            // width: double.infinity,
+            // height: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Theme.of(context).primaryColor.withOpacity(0.9),
+                  Theme.of(context).primaryColor,
+                  Theme.of(context).primaryColor.withOpacity(0.9),
+                ],
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: appBarHeight,
+                ),
+                FloatingButton(),
+                Bubbles(),
+                ListOfIngredients(),
               ],
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: appBarHeight,
-              ),
-              FloatingButton(),
-              Bubbles(),
-              ListOfIngredients(),
-            ],
           ),
         ),
       ),
