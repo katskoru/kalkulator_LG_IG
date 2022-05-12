@@ -4,13 +4,23 @@ import 'package:kalkulator_lg_ig/wigdets/one_ingredient.dart';
 
 import '../models/food_model.dart';
 
-class ListOfIngredients extends StatelessWidget {
-  const ListOfIngredients({Key? key}) : super(key: key);
+class ListOfIngredients extends StatefulWidget {
+  ListOfIngredients({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<ListOfIngredients> createState() => _ListOfIngredientsState();
+}
+
+class _ListOfIngredientsState extends State<ListOfIngredients> {
+  var newFood = Food(name: "", IG: 0, fiber: 0, carbohydrates: 0);
+  List lista = ["tekst", "zapychacz", "kolejny"];
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 240,
       margin: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
           boxShadow: [
@@ -36,8 +46,8 @@ class ListOfIngredients extends StatelessWidget {
               ),
               IconButton(
                   onPressed: () {
-                    var _newFood =
-                        Food(name: "", IG: 0, fiber: 0, carbohydrates: 0);
+                    newFood = Food(name: "", IG: 0, fiber: 0, carbohydrates: 0);
+                    lista.add(newFood);
                   },
                   icon: Icon(Icons.add))
             ],
@@ -72,10 +82,28 @@ class ListOfIngredients extends StatelessWidget {
               endIndent: 15,
             ),
           ),
-          Expanded(
-              child: ListView(
-            children: [OneIngredient()],
-          ))
+          Flexible(
+            fit: FlexFit.tight,
+            child: ListView(
+              children: [
+                OneIngredient(
+                  editedProduct: newFood,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [Text(lista[index])],
+                        );
+                      },
+                      itemCount: lista.length),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );

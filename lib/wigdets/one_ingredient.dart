@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kalkulator_lg_ig/models/food_model.dart';
 import 'package:kalkulator_lg_ig/wigdets/my_text.dart';
 
 class OneIngredient extends StatelessWidget {
-  OneIngredient({Key? key}) : super(key: key);
-
-  List lista = [1, 2, 3, 4, 5, 6];
+  Food? editedProduct;
+  OneIngredient({Key? key, required Food editedProduct}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,49 @@ class OneIngredient extends StatelessWidget {
               children: [
                 SizedBox(
                     child: TextFormField(
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      onSaved: (value) {
+                        editedProduct = Food(
+                          name: value,
+                          IG: editedProduct!.IG,
+                          carbohydrates: editedProduct!.carbohydrates,
+                          fiber: editedProduct!.fiber,
+                        );
+                      },
                     ),
-                    width: 60),
-                MyText(
-                  text: "100",
-                  color: Theme.of(context).shadowColor,
-                  size: 16,
-                ),
+                    height: 40,
+                    width: 70),
+                SizedBox(
+                    child: TextFormField(
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        filled: true,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                      ),
+                      onSaved: (value) {
+                        editedProduct = Food(
+                          name: value,
+                          IG: editedProduct!.IG,
+                          carbohydrates: editedProduct!.carbohydrates,
+                          fiber: editedProduct!.fiber,
+                        );
+                      },
+                    ),
+                    height: 40,
+                    width: 70),
                 MyText(
                   text: "10",
                   color: Theme.of(context).shadowColor,
