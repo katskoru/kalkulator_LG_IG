@@ -4,6 +4,7 @@ class Food {
     required this.IG,
     required this.fiber,
     required this.carbohydrates,
+    this.grams = 0,
   });
 
   Food.fromJson(Map<String, Object?> json)
@@ -18,6 +19,7 @@ class Food {
   int? IG;
   double? carbohydrates;
   double? fiber;
+  double grams;
 
   Map<String, Object?> toJson() {
     return {

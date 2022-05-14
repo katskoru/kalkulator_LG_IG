@@ -2,9 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:kalkulator_lg_ig/models/food_model.dart';
 import 'package:kalkulator_lg_ig/wigdets/my_text.dart';
 
-class OneIngredient extends StatelessWidget {
-  Food? editedProduct;
+class OneIngredient extends StatefulWidget {
   OneIngredient({Key? key, required Food editedProduct}) : super(key: key);
+
+  @override
+  State<OneIngredient> createState() => _OneIngredientState();
+}
+
+class _OneIngredientState extends State<OneIngredient> {
+  Food? editedProduct =
+      Food(name: "", IG: 0, fiber: 0, carbohydrates: 0, grams: 0);
+  final _formKey = GlobalKey<FormState>();
+
+  _submitForm() {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    }
+    _formKey.currentState!.save();
+    // Provider.of<ProductsProvider>(context, listen: false)
+    //     .addProduct(_editedProduct);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +30,7 @@ class OneIngredient extends StatelessWidget {
       children: [
         ListTile(
           title: Form(
+            key: _formKey,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -28,7 +47,7 @@ class OneIngredient extends StatelessWidget {
                       ),
                       onSaved: (value) {
                         editedProduct = Food(
-                          name: value,
+                          name: value!,
                           IG: editedProduct!.IG,
                           carbohydrates: editedProduct!.carbohydrates,
                           fiber: editedProduct!.fiber,
@@ -51,12 +70,14 @@ class OneIngredient extends StatelessWidget {
                       ),
                       onSaved: (value) {
                         editedProduct = Food(
-                          name: value,
+                          name: editedProduct!.name,
                           IG: editedProduct!.IG,
                           carbohydrates: editedProduct!.carbohydrates,
                           fiber: editedProduct!.fiber,
+                          grams: double.parse(value!),
                         );
                       },
+                      onFieldSubmitted: (_) => _submitForm(),
                     ),
                     height: 40,
                     width: 70),

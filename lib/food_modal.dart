@@ -130,13 +130,11 @@ class _FoodModalState extends State<FoodModal> {
                           FirebaseFirestore.instance
                               .collection("food")
                               .add(_newFood.toJson());
-                          initState();
                         } else {
                           FirebaseFirestore.instance
                               .collection("food")
                               .doc(widget.docID)
                               .update(_newFood.toJson());
-                          initState();
                         }
                       }
                     },

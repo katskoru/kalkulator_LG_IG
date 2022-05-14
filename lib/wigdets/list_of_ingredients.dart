@@ -14,8 +14,8 @@ class ListOfIngredients extends StatefulWidget {
 }
 
 class _ListOfIngredientsState extends State<ListOfIngredients> {
-  var newFood = Food(name: "", IG: 0, fiber: 0, carbohydrates: 0);
-  List lista = ["tekst", "zapychacz", "kolejny"];
+  var newFood = Food(name: "", IG: 0, fiber: 0, carbohydrates: 0, grams: 0);
+  List<Food> lista = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +46,12 @@ class _ListOfIngredientsState extends State<ListOfIngredients> {
               ),
               IconButton(
                   onPressed: () {
-                    newFood = Food(name: "", IG: 0, fiber: 0, carbohydrates: 0);
-                    lista.add(newFood);
+                    setState(() {
+                      lista.add(newFood);
+                      lista.forEach((element) {
+                        print(element);
+                      });
+                    });
                   },
                   icon: Icon(Icons.add))
             ],
@@ -96,7 +100,10 @@ class _ListOfIngredientsState extends State<ListOfIngredients> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Column(
-                          children: [Text(lista[index])],
+                          children: [
+                            Text(lista[index].name!),
+                            Text(lista[index].grams.toString())
+                          ],
                         );
                       },
                       itemCount: lista.length),
